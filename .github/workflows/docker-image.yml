@@ -1,3 +1,4 @@
+
 name: Docker Image CI
 
 on:
@@ -9,10 +10,38 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag operating-systems-2/ci-cd-demo:latest
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/operating-systems-2/ci-cd-demo
+          labels: latest
+  deploy:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fast Webhook
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: http://cosci.be:9000/api/webhooks/5dc429ef-63f4-4e8d-89be-c47fd408d2cd
