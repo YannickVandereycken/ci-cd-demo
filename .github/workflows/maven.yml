@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Animals-1.0.war
-        path: /target/Animals-1.0.war
+        path: /home/runner/work/ci-cd-demo/ci-cd-demo/target/Animals-1.0.war
   
   docker:
     
