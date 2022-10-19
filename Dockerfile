@@ -9,7 +9,7 @@ RUN mvn -B dependency:resolve dependency:resolve-plugins
 #Copy source code
 COPY src /build/src
 # Build application
-RUN mvn package
+RUN mvn package -Dmaven.test.skip
 
 #deploy in tomcat
 FROM tomcat:latest
