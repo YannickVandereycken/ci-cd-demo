@@ -22,5 +22,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: skip tests
+      run: mvn package -Dmaven.test.skip=true
     - name: Build with Maven
       run: mvn -B package --file pom.xml
