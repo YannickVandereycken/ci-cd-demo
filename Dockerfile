@@ -10,10 +10,9 @@ RUN mvn -B dependency:resolve dependency:resolve-plugins
 COPY src /build/src
 # Build application
 RUN mvn package
-#copy war file
-COPY --from=builder /build/target/*.war animals.war
 
 #deploy in tomcat
 FROM tomcat:latest
-COPY animals.war /usr/local/tomcat/webapps/
+#copy war file
+COPY --from=builder /build/target/*.war /usr/local/tomcat/webapps/animals.war
 CMD ["catalina.sh","run"]
