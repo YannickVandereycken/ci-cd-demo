@@ -44,4 +44,4 @@ jobs:
       - name: Fast Webhook
         uses: jasongitmail/fast-webhook@v1.1.4
         with:
-          url: http://cosci.be:9000/api/webhooks/5dc429ef-63f4-4e8d-89be-c47fd408d2cd
+          url: http://www.2.cnw2.uclllabs.be:9000/api/webhooks/74668fdc-966a-45f2-869b-66cbdcfe4b92
