@@ -14,5 +14,5 @@ RUN mvn package -Dmaven.test.skip
 #deploy in tomcat
 FROM tomcat:latest
 #copy war file
-COPY --from=builder /build/target/*.war /usr/local/tomcat/webapps/animals.war
+COPY --from=builder /build/target/*.war /usr/local/tomcat/webapps/ROOT.war
 CMD ["catalina.sh","run"]
