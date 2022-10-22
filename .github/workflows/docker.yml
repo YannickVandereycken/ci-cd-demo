@@ -36,18 +36,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  tagged-release:
-      name: "Tagged Release"
-      runs-on: "ubuntu-latest"
-
-      steps:
-        # ...
-        - name: "Build & test"
-          run: |
-            echo "done!"
-
-        - uses: "marvinpinto/action-automatic-releases@latest"
-          with:
-            automatic_release_tag: latest
-            prerelease: false
