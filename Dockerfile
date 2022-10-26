@@ -1,5 +1,5 @@
 ### BUILD image
-FROM maven:3-jdk-11 as builder
+FROM maven:3.8.6-openjdk-18-slim as builder
 # create app folder for sources
 RUN mkdir -p /build
 WORKDIR /build
@@ -12,7 +12,8 @@ COPY src /build/src
 RUN mvn package -Dmaven.test.skip
 
 #deploy in tomcat
-FROM tomcat:latest
+FROM tomcat:9.0-jdk17-corretto
 #copy war file
 COPY --from=builder /build/target/*.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
 CMD ["catalina.sh","run"]
